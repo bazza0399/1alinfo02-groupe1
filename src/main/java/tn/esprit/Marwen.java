@@ -1,7 +1,12 @@
 package tn.esprit;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpRequest;
 
 import org.apache.http.HttpResponse;
@@ -12,19 +17,44 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 public  class Marwen {
-	public static  String endpoint = "https://api-nba-v1.p.rapidapi.com/seasons/";
-	public void getNba() {
+	//dsqdqs
+	public static  String endpoint = "https://www.fishwatch.gov/api/species/red-snapper";
+	private static HttpURLConnection connection;
+	public static StringBuffer getNba() {
+		BufferedReader reader;
+		StringBuffer responseContent  = new StringBuffer();
+		String line;
 		try {
-		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create("https://api-nba-v1.p.rapidapi.com/seasons/"))
-				.header("x-rapidapi-host", "api-nba-v1.p.rapidapi.com")
-				.header("x-rapidapi-key", "e6fb6bbfcdmshb3bec53c6bb160dp16d40bjsne382e58f08ad")
-				.method("GET", HttpRequest.BodyPublishers.noBody())
-				.build();
-		        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		        System.out.println(response.body());
+			URL url = new URL(endpoint);
+			connection = (HttpURLConnection) url.openConnection();
+			
+			connection.setRequestMethod("GET");
+			connection.setConnectTimeout(5000);
+						
+			connection.setReadTimeout(36000);
+			int status = connection.getResponseCode();
+			System.out.println(status);
+			if(status>299) {
+				reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()) ); 
+				while ((line = reader.readLine()) != null) {
+					responseContent.append(line);
+				}
+			} else {
+				reader = new BufferedReader(new InputStreamReader(connection.getInputStream()) );
+				while ((line = reader.readLine()) != null) {
+					responseContent.append(line);
+				}
+			}
+			
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(responseContent);
+		return responseContent;
 	}
 }
