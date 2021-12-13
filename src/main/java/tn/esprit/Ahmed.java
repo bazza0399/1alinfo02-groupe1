@@ -12,10 +12,11 @@ package tn.esprit;
 
 public class Ahmed {
 	
-
 	public static void main(String[] args) {
-		String url = "https://jsonplaceholder.typicode.com/posts";
-		System.out.println(ApiCall.get(url));
+		String url1 = "https://jsonplaceholder.typicode.com/posts";
+		System.out.println(ApiCall.get(url1));
+		String url2 = "https://jsonplaceholder.typicode.com/posts/1/comments";
+		System.out.println(ApiCall.get(url2));
 	}
 
 }
