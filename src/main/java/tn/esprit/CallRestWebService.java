@@ -14,6 +14,8 @@ public class CallRestWebService {
 
 	
 	public static void main(String[] args) {
+		Marwen service = new Marwen();
+		System.out.println(service.getNba());
 		
 	}
 }
