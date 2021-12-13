@@ -7,6 +7,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.MalformedURLException;
 
+/**
+ * @author Ahmed-Bazza
+ * 
+ * URL utiles :
+ * http://theoryapp.com/parse-json-in-java/
+ * https://jsonformatter.curiousconcept.com/
+ * 
+ *
+ */
+
 public class ApiCall {
 	private static HttpURLConnection connection;
 	public static StringBuffer get(String apiUrl) {
