@@ -94,6 +94,15 @@ public class Article {
 
 	public static void main(String[] args) {
 	Article a1=new Article(1,soupape,mecanique,39);
-	System.out.println(a1);
+		Article a2=new Article(2,"culasse","mecanique",39);
+		Article a3=new Article(3,"segment","mecanique",23);
+		Article a4=new Article(4,"piston","mecanique",25);
+		Article a5=new Article(5,"arbre-a-came","mecanique",10);
+	    System.out.println(a1);
+		System.out.println(a2);
+		System.out.println(a3);
+		System.out.println(a4);
+		System.out.println(a5);
+
 	}
 
