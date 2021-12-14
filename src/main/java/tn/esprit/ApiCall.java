@@ -7,26 +7,31 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.MalformedURLException;
 
+/**
+ * @author Ahmed-Bazza
+ * 
+ * URL utiles :
+ * http://theoryapp.com/parse-json-in-java/
+ * https://jsonformatter.curiousconcept.com/
+ * 
+ *
+ */
 
-
-public  class Marwen {
-	
-	public static  String endpoint = "https://www.fishwatch.gov/api/species/red-snapper";
+public class ApiCall {
 	private static HttpURLConnection connection;
-	public static StringBuffer getNba() {
+	public static StringBuffer get(String apiUrl) {
 		BufferedReader reader;
 		StringBuffer responseContent  = new StringBuffer();
 		String line;
 		try {
-			URL url = new URL(endpoint);
+			URL url = new URL(apiUrl);
 			connection = (HttpURLConnection) url.openConnection();
 			
 			connection.setRequestMethod("GET");
 			connection.setConnectTimeout(5000);
-						
-			connection.setReadTimeout(36000);
+			connection.setReadTimeout(5000);
 			int status = connection.getResponseCode();
-			System.out.println(status);
+			
 			if(status>299) {
 				reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()) ); 
 				while ((line = reader.readLine()) != null) {
@@ -47,7 +52,6 @@ public  class Marwen {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(responseContent);
 		return responseContent;
 	}
 }
